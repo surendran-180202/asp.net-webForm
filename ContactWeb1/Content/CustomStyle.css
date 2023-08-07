@@ -1,0 +1,54 @@
+﻿body {
+}
+.inputbox {
+    margin: 0 0 0 30px;
+    border: none;
+    width: 250px;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    text-align: center;
+}.inputbox::placeholder {
+    text-align: center;
+    font-size: 12px;
+}.inputbox:focus {
+    outline: none;
+}.table1 {
+    margin: 0 0 0 200px;
+
+ }.outSideBox {
+    border-radius:20px;
+    margin: 0 0 0 20rem;
+    width:50rem;
+    height:60rem;
+    background-color:antiquewhite;
+}.headLine{
+    margin: 0 0 0 80px;
+    font-size:25px;
+    color:darkcyan;
+}.Label {
+    font-size: 20px;
+}.RadioBtn {
+    flex: 10 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} .btnstyle{
+    width:120px;
+    font-size:15px;
+    background-color:green;
+    border-radius:20px;
+    color:white;
+    border:none;
+}.btnstyle:hover {
+    background-color:deepskyblue;
+}.outSideBox1 {
+    border-radius: 20px;
+    margin: 0 0 0 20rem;
+    width: 50rem;
+    height: 10rem;
+    background-color: antiquewhite;
+}.center{
+    text-align:center;
+}.center .inputbox{
+    margin: -10px 0 0 0;
+}

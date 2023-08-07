@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EducationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Education .dbo.tblAddress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblAddress">
+    <Key>
+      <PropertyRef Name="PERSONID" />
+      <PropertyRef Name="ADDRESSTYPE" />
+    </Key>
+    <Property Name="PERSONID" Type="int" Nullable="false" />
+    <Property Name="ADDRESSTYPE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOORNO" Type="int" />
+    <Property Name="STREET" Type="varchar" MaxLength="50" />
+    <Property Name="CITY" Type="varchar" MaxLength="50" />
+    <Property Name="DISTRICT" Type="varchar" MaxLength="50" />
+    <Property Name="STATE" Type="varchar" MaxLength="50" />
+    <Property Name="COUNTRY" Type="varchar" MaxLength="50" />
+    <Property Name="PINCODE" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Education .dbo.tblContact' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblContact">
+    <Key>
+      <PropertyRef Name="PERSONID" />
+      <PropertyRef Name="CONTACTTYPE" />
+    </Key>
+    <Property Name="PERSONID" Type="int" Nullable="false" />
+    <Property Name="CONTACTTYPE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="MOBILE" Type="bigint" />
+    <Property Name="PHONE" Type="bigint" />
+  </EntityType>
+  <EntityType Name="tblPerson">
+    <Key>
+      <PropertyRef Name="PERSONID" />
+    </Key>
+    <Property Name="PERSONID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIRSTNAME" Type="varchar" MaxLength="50" />
+    <Property Name="LASTNAME" Type="varchar" MaxLength="50" />
+    <Property Name="GENDER" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="date" />
+  </EntityType>
+  <Association Name="FK_tblAddress_tblPerson">
+    <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPerson">
+        <PropertyRef Name="PERSONID" />
+      </Principal>
+      <Dependent Role="tblAddress">
+        <PropertyRef Name="PERSONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblContact_tblPerson">
+    <End Role="tblPerson" Type="Self.tblPerson" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblContact" Type="Self.tblContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPerson">
+        <PropertyRef Name="PERSONID" />
+      </Principal>
+      <Dependent Role="tblContact">
+        <PropertyRef Name="PERSONID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EducationModelStoreContainer">
+    <EntitySet Name="tblPerson" EntityType="Self.tblPerson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAddress" EntityType="Self.tblAddress" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblAddress].[PERSONID] AS [PERSONID], 
+    [tblAddress].[ADDRESSTYPE] AS [ADDRESSTYPE], 
+    [tblAddress].[DOORNO] AS [DOORNO], 
+    [tblAddress].[STREET] AS [STREET], 
+    [tblAddress].[CITY] AS [CITY], 
+    [tblAddress].[DISTRICT] AS [DISTRICT], 
+    [tblAddress].[STATE] AS [STATE], 
+    [tblAddress].[COUNTRY] AS [COUNTRY], 
+    [tblAddress].[PINCODE] AS [PINCODE]
+    FROM [dbo].[tblAddress] AS [tblAddress]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblContact" EntityType="Self.tblContact" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblContact].[PERSONID] AS [PERSONID], 
+    [tblContact].[CONTACTTYPE] AS [CONTACTTYPE], 
+    [tblContact].[EMAIL] AS [EMAIL], 
+    [tblContact].[MOBILE] AS [MOBILE], 
+    [tblContact].[PHONE] AS [PHONE]
+    FROM [dbo].[tblContact] AS [tblContact]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblAddress_tblPerson" Association="Self.FK_tblAddress_tblPerson">
+      <End Role="tblPerson" EntitySet="tblPerson" />
+      <End Role="tblAddress" EntitySet="tblAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblContact_tblPerson" Association="Self.FK_tblContact_tblPerson">
+      <End Role="tblPerson" EntitySet="tblPerson" />
+      <End Role="tblContact" EntitySet="tblContact" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
